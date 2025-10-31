@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Herbalife</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #5c5c5c;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 45px;
+    }
+
+    .logo h1 {
+      color: #5baa4a;
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #5baa4a;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      border-bottom: 2px solid #5baa4a;
+    }
+
+    .btn-sesion {
+      background-color: #5baa4a;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-sesion:hover {
+      background-color: #4b8f3f;
+    }
+
+    .contenido {
+      padding: 40px;
+    }
+
+    .bienvenida {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .bienvenida h2 {
+      color: #5baa4a;
+      font-size: 2rem;
+    }
+
+    .paneles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .panel {
+      background-color: #fff;
+      width: 280px;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-5px);
+    }
+
+    .panel h3 {
+      color: #5baa4a;
+      margin-bottom: 10px;
+    }
+
+    .panel p {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    .panel a {
+      background-color: #5baa4a;
+      color: white;
+      padding: 8px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .panel a:hover {
+      background-color: #4b8f3f;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #5baa4a;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .paneles {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="logo-herbalife.png" alt="Logo Herbalife">
+      <h1>Herbalife</h1>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="perfil.html">Mi Perfil</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <a href="login.html"><button class="btn-sesion">Cerrar sesión</button></a>
+    </div>
+  </header>
+
+  <section class="contenido">
+    <div class="bienvenida">
+      <h2>¡Bienvenido al sistema Herbalife!</h2>
+      <p id="mensajeRol">Cargando tu perfil...</p>
+    </div>
+
+    <div class="paneles">
+      <!-- Cliente -->
+      <div class="panel solo-cliente">
+        <h3>Mis pedidos</h3>
+        <p>Consulta el estado de tus pedidos o haz nuevas compras.</p>
+        <a href="pedidos.html">Ver pedidos</a>
+      </div>
+
+      <div class="panel solo-cliente">
+        <h3>Carrito</h3>
+        <p>Administra los productos que deseas comprar.</p>
+        <a href="carrito.html">Ir al carrito</a>
+      </div>
+
+      <!-- Administrador -->
+      <div class="panel solo-admin">
+        <h3>Gestión de usuarios</h3>
+        <p>Administra las cuentas registradas en el sistema.</p>
+        <a href="usuarios.html">Ir a usuarios</a>
+      </div>
+
+      <div class="panel solo-admin">
+        <h3>Gestión de productos</h3>
+        <p>Agrega, edita o elimina productos del catálogo.</p>
+        <a href="productos.html">Ir a productos</a>
+      </div>
+
+      <!-- Gerente -->
+      <div class="panel solo-gerente">
+        <h3>Estadísticas</h3>
+        <p>Consulta reportes de ventas y desempeño.</p>
+        <a href="reportes.html">Ver reportes</a>
+      </div>
+
+      <div class="panel solo-gerente">
+        <h3>Rendimiento</h3>
+        <p>Visualiza métricas de clientes y pedidos.</p>
+        <a href="estadisticas.html">Ver estadísticas</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Herbalife - Proyecto Formativo</p>
+  </footer>
+
+  <script>
+    // Simulación del rol (puedes cambiar a "admin", "cliente" o "gerente")
+    const rolUsuario = localStorage.getItem("rol") || "cliente";
+
+    const mensajeRol = document.getElementById("mensajeRol");
+    const seccionesAdmin = document.querySelectorAll(".solo-admin");
+    const seccionesCliente = document.querySelectorAll(".solo-cliente");
+    const seccionesGerente = document.querySelectorAll(".solo-gerente");
+
+    if (rolUsuario === "admin") {
+      mensajeRol.textContent = "Has iniciado sesión como Administrador.";
+      seccionesCliente.forEach(e => e.style.display = "none");
+      seccionesGerente.forEach(e => e.style.display = "none");
+    } else if (rolUsuario === "cliente") {
+      mensajeRol.textContent = "Has iniciado sesión como Cliente.";
+      seccionesAdmin.forEach(e => e.style.display = "none");
+      seccionesGerente.forEach(e => e.style.display = "none");
+    } else if (rolUsuario === "gerente") {
+      mensajeRol.textContent = "Has iniciado sesión como Gerente.";
+      seccionesAdmin.forEach(e => e.style.display = "none");
+      seccionesCliente.forEach(e => e.style.display = "none");
+    }
+  </script>
+</body>
+</html>

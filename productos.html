@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos - Herbalife</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #fff;
+      color: #5c5c5c;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 45px;
+    }
+
+    .logo h1 {
+      color: #5baa4a;
+      font-size: 1.8rem;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #5baa4a;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      border-bottom: 2px solid #5baa4a;
+    }
+
+    .btn-sesion {
+      background-color: #5baa4a;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-sesion:hover {
+      background-color: #4b8f3f;
+    }
+
+    main {
+      padding: 50px 80px;
+      background-color: #f9f9f9;
+      min-height: 80vh;
+    }
+
+    h2 {
+      text-align: center;
+      color: #5baa4a;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .busqueda {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      gap: 10px;
+    }
+
+    .busqueda input {
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      width: 300px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .busqueda input:focus {
+      border-color: #5baa4a;
+      box-shadow: 0 0 4px rgba(91, 170, 74, 0.5);
+    }
+
+    .busqueda button {
+      background-color: #5baa4a;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .busqueda button:hover {
+      background-color: #4b8f3f;
+    }
+
+    .grid-productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .producto {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+
+    .producto:hover {
+      transform: translateY(-5px);
+    }
+
+    .producto img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .producto h3 {
+      color: #5baa4a;
+      margin: 10px 0;
+    }
+
+    .producto p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .producto .precio {
+      font-weight: bold;
+      color: #333;
+      margin-top: 5px;
+    }
+
+    .producto button {
+      background-color: #5baa4a;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .producto button:hover {
+      background-color: #4b8f3f;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #5baa4a;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        padding: 30px 20px;
+      }
+
+      .busqueda input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="logo-herbalife.png" alt="Herbalife Logo" />
+      <h1>Herbalife</h1>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <a href="login.html"><button class="btn-sesion">Cerrar Sesión</button></a>
+    </div>
+  </header>
+
+  <main>
+    <h2>Nuestros Productos</h2>
+
+    <div class="busqueda">
+      <input type="text" id="buscar" placeholder="Buscar producto...">
+      <button onclick="buscarProducto()">Buscar</button>
+    </div>
+
+    <div class="grid-productos" id="listaProductos">
+      <div class="producto">
+        <img src="batido-vainilla.jpg" alt="Batido Vainilla">
+        <h3>Batido Nutricional Vainilla</h3>
+        <p>Delicioso batido con proteínas y nutrientes esenciales.</p>
+        <p class="precio">$85.000 COP</p>
+        <button>Agregar al carrito</button>
+      </div>
+
+      <div class="producto">
+        <img src="te-hierbas.jpg" alt="Té Herbalife">
+        <h3>Té Concentrado Herbal</h3>
+        <p>Bebida refrescante con extracto natural de hierbas.</p>
+        <p class="precio">$60.000 COP</p>
+        <button>Agregar al carrito</button>
+      </div>
+
+      <div class="producto">
+        <img src="colageno.jpg" alt="Colágeno Plus">
+        <h3>Colágeno Plus</h3>
+        <p>Fórmula avanzada para el cuidado de tu piel y articulaciones.</p>
+        <p class="precio">$95.000 COP</p>
+        <button>Agregar al carrito</button>
+      </div>
+
+      <div class="producto">
+        <img src="crema.jpg" alt="Crema Corporal">
+        <h3>Crema Corporal Natural</h3>
+        <p>Hidrata y suaviza tu piel con extractos naturales.</p>
+        <p class="precio">$70.000 COP</p>
+        <button>Agregar al carrito</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Herbalife - Proyecto Formativo</p>
+  </footer>
+
+  <script>
+    function buscarProducto() {
+      const input = document.getElementById("buscar").value.toLowerCase();
+      const productos = document.querySelectorAll(".producto");
+      productos.forEach(p => {
+        const nombre = p.querySelector("h3").textContent.toLowerCase();
+        p.style.display = nombre.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+
+</body>
+</html>

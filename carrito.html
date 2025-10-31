@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito de Compras - Herbalife</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f6f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 10px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #4CAF50;
+    }
+
+    main {
+      width: 90%;
+      max-width: 900px;
+      background: #fff;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #4CAF50;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    td img {
+      width: 60px;
+      border-radius: 6px;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .acciones button {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .acciones button:hover {
+      background-color: #c0392b;
+    }
+
+    .resumen {
+      margin-top: 30px;
+      text-align: right;
+    }
+
+    .resumen p {
+      font-size: 1.1rem;
+      margin: 8px 0;
+    }
+
+    .btn-pago {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-pago:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Herbalife Logo">
+    <nav>
+      <a href="dashboard.html">Inicio</a>
+      <a href="perfil.html">Perfil</a>
+      <a href="pedidos.html">Pedidos</a>
+      <a href="ajustes.html">Ajustes</a>
+      <a href="login.html">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>🛒 Carrito de Compras</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody id="carrito">
+        <tr>
+          <td><img src="batido-vainilla.jpg" alt="Batido"></td>
+          <td>Batido Nutricional</td>
+          <td>$85.000</td>
+          <td><input type="number" value="1" min="1" onchange="actualizarTotal()"></td>
+          <td class="subtotal">$85.000</td>
+          <td class="acciones"><button onclick="eliminarFila(this)">Eliminar</button></td>
+        </tr>
+        <tr>
+          <td><img src="te-hierbas.jpg" alt="Té"></td>
+          <td>Té Concentrado</td>
+          <td>$60.000</td>
+          <td><input type="number" value="2" min="1" onchange="actualizarTotal()"></td>
+          <td class="subtotal">$120.000</td>
+          <td class="acciones"><button onclick="eliminarFila(this)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="resumen">
+      <p><strong>Subtotal:</strong> <span id="subtotal">$205.000</span></p>
+      <p><strong>IVA (19%):</strong> <span id="iva">$38.950</span></p>
+      <p><strong>Total:</strong> <span id="total">$243.950</span></p>
+      <button class="btn-pago" onclick="pagar()">Proceder al pago</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Herbalife - Todos los derechos reservados
+  </footer>
+
+  <script>
+    function eliminarFila(boton) {
+      const fila = boton.closest('tr');
+      fila.remove();
+      actualizarTotal();
+    }
+
+    function actualizarTotal() {
+      const filas = document.querySelectorAll("#carrito tr");
+      let subtotal = 0;
+
+      filas.forEach(fila => {
+        const precio = parseInt(fila.cells[2].innerText.replace(/\D/g, ''));
+        const cantidad = parseInt(fila.querySelector("input").value);
+        const sub = precio * cantidad;
+        fila.querySelector(".subtotal").innerText = `$${sub.toLocaleString()}`
+        subtotal += sub;
+      });
+
+      const iva = subtotal * 0.19;
+      const total = subtotal + iva;
+
+      document.getElementById("subtotal").innerText = `$${subtotal.toLocaleString()}`;
+      document.getElementById("iva").innerText = `$${iva.toLocaleString()}`;
+      document.getElementById("total").innerText = `$${total.toLocaleString()}`;
+    }
+
+    function pagar() {
+      alert("✅ Tu compra ha sido procesada con éxito. ¡Gracias por confiar en Herbalife!");
+      window.location.href = "pedidos.html";
+    }
+  </script>
+</body>
+</html>
