@@ -19,10 +19,10 @@
 
     .form-container {
       background: #fff;
-      padding: 40px;
-      border-radius: 6px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      width: 400px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0px 10px rgba(0,0,0,0.01);
+      width: 350px;
       position: relative;
       overflow: hidden;
     }
@@ -66,8 +66,8 @@
 
     input {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
+      padding: 10px;
+      margin: 15px 0;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 14px;
@@ -148,32 +148,40 @@
 <body>
 
   <div class="form-container">
-    <h2>Crear una cuenta de Herbalife</h2>
-    <p>Para acceder a tu cuenta en MyHerbalife, hacer pedidos, y más...</p>
+    <h2>Crear una cuenta</h2>
+    <p>Completa los datos para registrarte</p>
 
-    <form id="signupForm">
-      <input type="email" placeholder="Dirección de correo electrónico*" required>
-      <input type="email" placeholder="Confirmar dirección de correo electrónico*" required>
-      <input type="password" placeholder="Contraseña*" required>
+    <form id="signupForm" method="POST">
+
+      <input type="text" id="nombreApellido" name="nombreApellido" placeholder="Nombre completo*" required>
+
+      <input type="email" id="correo" name="correoElectronico" placeholder="Correo electrónico*" required>
+
+      <input type="email" id="confirmarCorreo" name="confirmarCorreo" placeholder="Confirmar correo*" required>
+
+      <input type="text" id="telefono" name="telefono" placeholder="Teléfono*" required>
+
+      <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña*" required minlength="8">
+
+      <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder="Confirmar contraseña*" required>
+
       <div class="note">
-        Su contraseña debe tener un mínimo de 8 caracteres y usar al menos 3 de los siguientes: mayúsculas, minúsculas, números y símbolos.
+        La contraseña debe tener mínimo 8 caracteres.
       </div>
-      <input type="password" placeholder="Confirmar contraseña*" required>
 
-      <!-- CAPTCHA sencillo -->
       <div class="captcha">
-        <input type="checkbox" id="notrobot">
+        <input type="checkbox" id="notrobot" required>
         <label for="notrobot">No soy un robot</label>
-        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
       </div>
 
       <p style="font-size:12px; color:#444; line-height: 1.4;">
         Creando una cuenta, estás de acuerdo con los
-        <a href="#" style="color:#4890ef; text-decoration:none;">Términos y Condiciones de Uso</a>
-        y la <a href="#" style="color:#4890ef; text-decoration:none;">Política de Privacidad</a> de Herbalife.
+        <a href="#" style="color:#4890ef;">Términos y Condiciones de Uso</a>
+        y la <a href="#" style="color:#4890ef;">Política de Privacidad</a>.
       </p>
 
       <button type="submit">Crear cuenta</button>
+
     </form>
 
     <div class="redirect">
@@ -181,18 +189,64 @@
     </div>
   </div>
 
-  <script>
-    // Validación simple del "No soy un robot"
-    document.getElementById("signupForm").addEventListener("submit", function(e) {
-      const check = document.getElementById("notrobot");
-      if (!check.checked) {
-        e.preventDefault();
-        alert("Por favor, confirma que no eres un robot antes de continuar.");
-      } else {
-        alert("✅ Cuenta creada correctamente (simulado).");
-      }
-    });
-  </script>
+</body>
+
+<script>
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombreApellido").value;
+    const correo = document.getElementById("correo").value;
+    const confirmarCorreo = document.getElementById("confirmarCorreo").value;
+    const telefono = document.getElementById("telefono").value;
+    const contrasena = document.getElementById("contrasena").value;
+    const confirmarContrasena = document.getElementById("confirmarContrasena").value;
+    const check = document.getElementById("notrobot");
+
+    if (!check.checked) {
+        alert("Por favor confirma que no eres un robot");
+        return;
+    }
+
+    if (correo !== confirmarCorreo) {
+        alert("Los correos no coinciden");
+        return;
+    }
+
+    if (contrasena !== confirmarContrasena) {
+        alert("Las contraseñas no coinciden");
+        return;
+    }
+
+    try {
+        const respuesta = await fetch("http://127.0.0.1:3000/api/registro", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombreApellido: nombre,
+                correoElectronico: correo,
+                telefono: telefono,
+                contrasena: contrasena
+            })
+        });
+
+        const data = await respuesta.json();
+
+        if (data.success) {
+            alert("✅ Cuenta creada correctamente");
+            window.location.href = "login.html";
+        } else {
+            alert("Error al registrar");
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo conectar con el servidor");
+    }
+});
+</script>
 
 </body>
 </html>

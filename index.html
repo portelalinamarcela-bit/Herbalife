@@ -86,7 +86,14 @@
       align-items: center;
       justify-content: space-between;
       padding: 60px 80px;
-      background: linear-gradient(to right, #eaf7e5, #ffffff);
+      min-height: 450px;
+
+      background-image: url('./img/fondo_inicio.png');
+      background-size: contain;
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-color: #eaf7e5;
+     
     }
 
     .texto-hero {
@@ -242,7 +249,7 @@
 
   <header>
     <div class="logo">
-      <img src="logo-herbalife.png" alt="Herbalife Logo">
+      <img src= "./img/logo.png" alt="Herbalife Logo">
       <h1>Herbalife</h1>
     </div>
 
@@ -270,30 +277,27 @@
       <a href="productos.html" class="btn-verde">Ver productos</a>
     </div>
 
-    <div class="imagen-hero">
-      <img src="batido.png" alt="Batido Herbalife">
-    </div>
   </section>
 
   <section class="productos">
     <h2>Productos destacados</h2>
     <div class="contenedor-productos">
       <div class="producto">
-        <img src="batido-vainilla.jpg" alt="Batido Vainilla">
+        <img src="./img/batido_nutricional.webp" alt="Batido Café latte">
         <h3>Batido Nutricional</h3>
         <p>Delicioso y saludable, ideal para tu bienestar diario.</p>
         <a href="productos.html"><button>Ver más</button></a>
       </div>
 
       <div class="producto">
-        <img src="te-hierbas.jpg" alt="Té Herbalife">
+        <img src="./img/te_concentrado.webp" alt="Té Concentrado de Hierbas">
         <h3>Té Concentrado</h3>
         <p>Te ayuda a mantenerte activo y concentrado todo el día.</p>
         <a href="productos.html"><button>Ver más</button></a>
       </div>
 
       <div class="producto">
-        <img src="crema.jpg" alt="Crema Cuidado Personal">
+        <img src="./img/crema_cuidado_personal.webp" alt="Crema Cuidado Personal">
         <h3>Cuidado Personal</h3>
         <p>Cuida tu piel de manera natural y eficaz.</p>
         <a href="productos.html"><button>Ver más</button></a>
@@ -311,5 +315,6 @@
     <p>&copy; 2025 Herbalife - Proyecto Formativo</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

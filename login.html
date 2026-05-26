@@ -40,8 +40,8 @@
         }
 
         .login-container img {
-            width: 50px;
-            margin-bottom: 5px;
+            width:45px;
+            margin-left: -24px;
         }   
 
         .login-container h1{
@@ -116,8 +116,10 @@
 </head>
 <body>
     <div class="login-container">
-        <img src="logo.png" alt="Herbalife Logo">
-        <h1>Herbalife</h1>
+        <h1 class="titulo">
+            Herbalife
+            <img src="img/logo.png">
+        </h1>
 
         <h2>Bienvenido</h2>
 
@@ -132,26 +134,47 @@
     </div>
 
     <script>
-        // Simulación de credenciales de ejemplo
-        const usuarios = [
-            { correo: "admin@herbalife.com", contrasena: "admin123" },
-            { correo: "cliente@herbalife.com", contrasena: "cliente123" }
-        ];
+console.log("Script cargado");
 
-        document.getElementById("loginForm").addEventListener("submit", function(event){
-            event.preventDefault();
-            const correo = document.getElementById("correo").value;
-            const contrasena = document.getElementById("contrasena").value;
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    console.log("Click en login");
 
-            const usuario = usuarios.find(u => u.correo === correo && u.contrasena === contrasena);
+    const correo = document.getElementById("correo").value;
+    const contrasena = document.getElementById("contrasena").value;
 
-            if (usuario) {
-                // Redirige al inicio si el usuario existe
-                window.location.href = "inicio.html";
-            } else {
-                alert("Correo o contraseña incorrectos. Intenta nuevamente.");
-            }
+    try {
+        console.log("Enviando datos...");
+
+        const respuesta = await fetch("http://127.0.0.1:3000/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                correo: correo,
+                contrasena: contrasena
+            })
         });
-    </script>
+
+        const data = await respuesta.json();
+
+        console.log("Respuesta recibida:", data);
+
+        if (data.success) {
+            window.location.href = "dashboard.html";
+        } else {
+            alert("Correo o contraseña incorrectos");
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudo conectar con el servidor");
+    }
+});
+</script>
+
 </body>
 </html>
+
+
